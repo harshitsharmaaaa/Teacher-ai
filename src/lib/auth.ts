@@ -13,4 +13,9 @@ export const auth = betterAuth({
             ...schema,
         },
     })
+<<<<<<< Authentication-UI
 });
+=======
+});
+
+>>>>>>> main
