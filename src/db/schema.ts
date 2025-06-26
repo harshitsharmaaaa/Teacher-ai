@@ -1,11 +1,6 @@
-<<<<<<< Authentication-UI
-import { text, pgTable, timestamp ,boolean} from "drizzle-orm/pg-core";
-
-=======
 
 import { text, pgTable, timestamp ,boolean} from "drizzle-orm/pg-core";
 
->>>>>>> main
 
 
 // export const usersTable = pgTable("users", {
