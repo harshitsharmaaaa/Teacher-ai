@@ -9,6 +9,7 @@ import { useState } from "react";
 
 
 import {Input} from "@/components/ui/input";
+import {FaGithub, FaGoogle} from "react-icons/fa";
 import {Button} from "@/components/ui/button";
 import {  OctagonAlertIcon } from "lucide-react";
 import {
@@ -160,11 +161,30 @@ export const SignUpView = () => {
                 </div>
 
                 <div className="grid grid-cols-2 gap-4">
-                  <Button variant="outline" type="button" disabled={pending} className="w-full">
-                    Google
+                  <Button 
+                  variant="outline"
+                   type="button" 
+                   disabled={pending} 
+                   onClick={() => {
+                      authClient.signIn.social({
+                        provider: "google",
+                      });
+                    }
+                   }
+                   className="w-full">
+                    <FaGoogle/>
                   </Button>
-                  <Button variant="outline" type="button" disabled={pending} className="w-full">
-                    Github
+                  <Button
+                   variant="outline" 
+                   type="button" 
+                   onClick={() => {
+                      authClient.signIn.social({
+                        provider: "github",
+                      });
+                    }}
+                   disabled={pending}
+                    className="w-full">
+                    <FaGithub/>
                   </Button>
                 </div>
                 <div className="text-center text-sm">
