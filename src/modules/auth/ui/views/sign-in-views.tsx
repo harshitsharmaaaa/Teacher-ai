@@ -128,6 +128,7 @@ export const SignInViews = () => {
                    type="button"
                     disabled={pending}
                     onClick={() => {
+                      setPending(true);
                       authClient.signIn.social({
                         provider: "google",
                       });
@@ -138,6 +139,7 @@ export const SignInViews = () => {
                   <Button variant="outline" 
                     type="button" 
                     onClick={() => {
+                      setPending(true);
                       authClient.signIn.social({
                         provider: "github",
                       });
