@@ -157,13 +157,135 @@ export const SignInViews = () => {
           </div>
 
           {/* RIGHT SIDE IMAGE/PANEL */}
-          <div className="hidden md:flex flex-col items-center justify-center bg-green-700 text-white p-10 relative">
-            <div className="absolute inset-0 bg-green-700 bg-gradient-radial from-green-700 to-green-900 opacity-80" />
-            <div className="relative z-10 flex flex-col items-center">
-              <img src="/logo.svg" alt="Logo" className="h-24 w-24 mb-4" />
-              <p className="text-xl font-semibold">Meet.AI</p>
-            </div>
-          </div>
+        <div 
+  className="hidden md:flex flex-col items-center justify-center p-10 relative overflow-hidden"
+  style={{
+    background: 'linear-gradient(135deg, #047857 0%, #065f46 30%, #064e3b 100%)',
+  }}
+>
+  {/* Animated gradient overlay */}
+  <div 
+    className="absolute inset-0"
+    style={{
+      background: `radial-gradient(circle at 30% 40%, rgba(110, 231, 183, 0.15) 0%, transparent 40%),
+                   radial-gradient(circle at 70% 60%, rgba(16, 185, 129, 0.2) 0%, transparent 40%)`,
+      animation: 'pulse 12s infinite alternate',
+    }}
+  />
+  
+  {/* Grid texture overlay */}
+  <div 
+    className="absolute inset-0"
+    style={{
+      backgroundImage: `linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px)`,
+      backgroundSize: '20px 20px',
+    }}
+  />
+  
+  {/* Floating bubbles */}
+  <div 
+    className="absolute top-1/4 left-1/4 w-6 h-6 rounded-full"
+    style={{
+      background: 'rgba(167, 243, 208, 0.3)',
+      animation: 'float 8s ease-in-out infinite',
+    }}
+  />
+  <div 
+    className="absolute top-1/3 right-1/3 w-4 h-4 rounded-full"
+    style={{
+      background: 'rgba(110, 231, 183, 0.4)',
+      animation: 'float 10s ease-in-out 1s infinite',
+    }}
+  />
+  <div 
+    className="absolute bottom-1/4 left-1/3 w-5 h-5 rounded-full"
+    style={{
+      background: 'rgba(94, 234, 212, 0.3)',
+      animation: 'float 9s ease-in-out 2s infinite',
+    }}
+  />
+  
+  {/* Content container */}
+  <div className="relative z-10 flex flex-col items-center text-center">
+    {/* Animated logo container */}
+    <div 
+      className="p-4 mb-6 rounded-2xl"
+      style={{
+        background: 'rgba(255, 255, 255, 0.1)',
+        backdropFilter: 'blur(4px)',
+        border: '1px solid rgba(255, 255, 255, 0.2)',
+        boxShadow: '0 8px 32px rgba(0, 0, 0, 0.2)',
+        animation: 'pulseScale 6s infinite alternate',
+      }}
+    >
+      <img 
+        src="/logo.svg" 
+        alt="Meet.AI Logo" 
+        className="h-24 w-24 transition-all duration-500 hover:rotate-6 hover:scale-110"
+      />
+    </div>
+    
+    {/* Brand name with gradient text */}
+    <h2 
+      className="text-3xl font-bold mb-2"
+      style={{
+        background: 'linear-gradient(to right, #a7f3d0, #5eead4)',
+        WebkitBackgroundClip: 'text',
+        WebkitTextFillColor: 'transparent',
+        textShadow: '0 2px 4px rgba(0, 0, 0, 0.2)',
+      }}
+    >
+      Meet.AI
+    </h2>
+    
+    {/* Tagline with fade-in effect */}
+    <p 
+      className="max-w-xs mt-3 text-lg font-light tracking-wide"
+      style={{
+        color: 'rgba(255, 255, 255, 0.9)',
+        animation: 'fadeIn 1.5s ease-out',
+      }}
+    >
+      Intelligent Meetings, Elevated
+    </p>
+    
+    {/* Animated dots */}
+    <div className="flex space-x-2 mt-6">
+      {[0, 300, 600].map(delay => (
+        <div 
+          key={delay}
+          className="w-2 h-2 rounded-full"
+          style={{
+            background: '#5eead4',
+            animation: `pulse 1.5s ${delay}ms infinite`,
+          }}
+        />
+      ))}
+    </div>
+  </div>
+  
+  {/* Inline styles for animations */}
+  <style jsx>{`
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-15px); }
+    }
+    @keyframes pulse {
+      0% { opacity: 0.3; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.1); }
+      100% { opacity: 0.3; transform: scale(1); }
+    }
+    @keyframes pulseScale {
+      0% { transform: scale(1); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2); }
+      100% { transform: scale(1.03); box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3); }
+    }
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: translateY(10px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+  `}</style>
+</div>
         </CardContent>
       </Card>
       
