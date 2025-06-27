@@ -1,15 +1,6 @@
 
 import { text, pgTable, timestamp ,boolean} from "drizzle-orm/pg-core";
-
-
-
-// export const usersTable = pgTable("users", {
-//   id: integer().primaryKey().generatedAlwaysAsIdentity(),
-//   name: varchar({ length: 255 }).notNull(),
-//   age: integer().notNull(),
-//   email: varchar({ length: 255 }).notNull().unique(),
-// });
-
+import {nanoid} from "nanoid";
 
 export const user = pgTable("user", {
   id: text('id').primaryKey(),
@@ -55,4 +46,14 @@ export const verification = pgTable("verification", {
   expiresAt: timestamp('expires_at').notNull(),
   createdAt: timestamp('created_at').$defaultFn(() => new Date()),
   updatedAt: timestamp('updated_at').$defaultFn(() => new Date())
+});
+
+
+export const agents = pgTable("agents", {
+  id: text('id').primaryKey().$defaultFn(() => nanoid()),
+  name: text('name').notNull(),
+  userId: text('user_id').notNull().references(() => user.id, { onDelete: 'cascade' }),
+  instruction:text('instruction').notNull(),
+  createdAt: timestamp('created_At').notNull().defaultNow(),
+  updatedAt: timestamp('updated_At').notNull().defaultNow(),
 });
