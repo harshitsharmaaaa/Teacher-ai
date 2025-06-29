@@ -14,6 +14,7 @@ export const AgentsView = () => {
     // if(isError) return <ErrorState title="Failed to Load Agents" description="An error occurred while fetching data"/>
     return (
         <div>
+            
             {JSON.stringify(data,null,2)}
         </div>
     )

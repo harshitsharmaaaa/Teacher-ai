@@ -1,4 +1,4 @@
-import {   CommandDialog, CommandInput } from "@/components/ui/command"
+import {   CommandDialog, CommandInput, CommandResponsiveDialog } from "@/components/ui/command"
 import { CommandItem, CommandList } from "cmdk"
 interface props{
     open:boolean
@@ -7,17 +7,17 @@ interface props{
 
 export const DashboardCommand =({open,setopen}:props)=>{
     return (
-        <CommandDialog open={open} onOpenChange={setopen}>
+        <CommandResponsiveDialog open={open} onOpenChange={setopen}>
         <CommandInput
         placeholder="find a meeting or agent"
-        className="w-full"
+        
         />
         <CommandList>
             <CommandItem>
                 Test
             </CommandItem>
         </CommandList>
-        </CommandDialog>
+        </CommandResponsiveDialog>
         
     )
 }
