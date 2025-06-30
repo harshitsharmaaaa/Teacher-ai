@@ -7,9 +7,9 @@ export const Agentsearchfilter=()=>{
     return(
         <div className="relative ">
             <Input
-                value={filters.Search}
+                value={filters.search}
                 onChange={(e)=>{
-                    setfilters({Search:e.target.value})
+                    setfilters({search:e.target.value})
                 }}
                 placeholder="filter by Name"
                 className="h-9 w-[200px] bg-white pl-7"

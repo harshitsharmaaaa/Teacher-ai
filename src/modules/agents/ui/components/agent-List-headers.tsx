@@ -11,11 +11,11 @@ import { DEFAULT_PAGE } from "@/constants"
 export const Listheader=()=>{
     const [filters,setfilters]= useAgentFilters();
     const [isDialogOpen, setIsDialogOpen] = useState(false);
-    const isAnyfilterModified = !!filters.Search;
+    const isAnyfilterModified = !!filters.search;
 
     const onClearfilters =()=>{
         setfilters({
-            Search:"",
+            search:"",
             page:DEFAULT_PAGE
         })
     }
