@@ -5,7 +5,8 @@ import { promise,z } from "zod";
 import { resolve } from "path";
 import { TRPCError } from "@trpc/server";
 import { agentInputSchema } from "../schema";
-import { eq, getTableColumns, sql } from "drizzle-orm";
+import { and, count, desc, eq, getTableColumns, ilike, sql } from "drizzle-orm";
+import { DEFAULT_PAGE, MAX_PAGE_SIZE, MIN_PAGE_SIZE,DEFAULT_PAGE_SIZE } from "@/constants";
 
 
 export const agentsRouter = createTRPCRouter({
@@ -22,10 +23,49 @@ export const agentsRouter = createTRPCRouter({
         return existingagent;
     }),
     //
-    getmany:ProtectedProcedure.query(async ()=>{
-        const data = await db.select().from(agents);
+    getmany:ProtectedProcedure
+        .input(z.object({
+            page:z.number().default(DEFAULT_PAGE),
+            pageSize:z.number().min(MIN_PAGE_SIZE).max(MAX_PAGE_SIZE).default(DEFAULT_PAGE_SIZE),
+            search:z.string().nullish()
+        })
+    )
+        .query(async ({ctx,input})=>{
+            const {search,page,pageSize}=input; 
+        const data = await db.select({
+            meetingCount:sql<number>`7`,
+            ...getTableColumns(agents),
         
-        return data;
+        })
+        .from(agents)
+        .where(
+            and(
+                eq(agents.userId,ctx.auth.user.id),
+                search ? ilike(agents.name,`%${search}%`) : undefined
+            )
+        )
+        .orderBy(desc(agents.createdAt),desc(agents.id))
+        .limit(pageSize)
+        .offset(pageSize*(page-1))
+
+        const [Total] = await db
+        .select({count:count()})
+        .from(agents)
+        .where(
+            and(
+                eq(agents.userId,ctx.auth.user.id),
+                search ? ilike(agents.name,`%${search}%`) : undefined
+            )  
+        )
+
+        const totalPages= Math.ceil(Total.count/pageSize);
+
+        
+        return {
+            items:data,
+            total:Total.count,
+            totalPages
+        };
     }),
 
     create: ProtectedProcedure
