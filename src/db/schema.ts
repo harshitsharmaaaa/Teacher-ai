@@ -1,6 +1,6 @@
-
 import { text, pgTable, timestamp ,boolean,pgEnum} from "drizzle-orm/pg-core";
 import {nanoid} from "nanoid";
+
 
 export const user = pgTable("user", {
   id: text('id').primaryKey(),
@@ -57,8 +57,6 @@ export const agents = pgTable("agents", {
   createdAt: timestamp('created_At').notNull().defaultNow(),
   updatedAt: timestamp('updated_At').notNull().defaultNow(),
 });
-
-
 
 export const meetingStatus = pgEnum("meeting_status", [
   "upcoming",
