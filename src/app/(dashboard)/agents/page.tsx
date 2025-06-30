@@ -8,8 +8,17 @@ import { Listheader } from '@/modules/agents/ui/components/agent-List-headers';
 import { auth } from '@/lib/auth';
 import { headers } from 'next/headers';
 import { redirect } from 'next/navigation';
+import type { SearchParams } from 'nuqs';
+import { LoadSearchParams } from '@/modules/agents/params';
 
-const page = async() => {
+interface Props{
+    searchParams:Promise<SearchParams>
+}
+
+const page = async({
+    searchParams
+}:Props) => {
+    const filters = await LoadSearchParams(searchParams);
     const session = await auth.api.getSession({
       headers: await headers(),
 
@@ -19,7 +28,9 @@ const page = async() => {
     }
 
     const queryclient = getQueryClient();
-    void queryclient.prefetchQuery(trpc.agents.getmany.queryOptions());
+    void queryclient.prefetchQuery(trpc.agents.getmany.queryOptions({
+        ...filters,
+    }));
   return (
     <>
     <Listheader/>
