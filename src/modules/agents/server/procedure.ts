@@ -11,15 +11,26 @@ import { DEFAULT_PAGE, MAX_PAGE_SIZE, MIN_PAGE_SIZE,DEFAULT_PAGE_SIZE } from "@/
 
 export const agentsRouter = createTRPCRouter({
     //
-    getOne:ProtectedProcedure.input(z.object({id:z.string()})).query(async ({input})=>{
+    getOne:ProtectedProcedure.input(z.object({id:z.string()})).query(async ({input,ctx})=>{
         const [existingagent] = await db
         .select({
             ...getTableColumns(agents),
             meetingCount:sql<number>`5`
         })
         .from(agents)
-        .where(eq(agents.id,input.id));
+        .where(
+            and(
+                eq(agents.id,input.id),
+                eq(agents.userId,ctx.auth.user.id)
+            )
+        );
         
+        if(!existingagent){
+            throw new TRPCError({
+                code:"NOT_FOUND",
+                message:"Agent not found"
+            })
+        }
         return existingagent;
     }),
     //
