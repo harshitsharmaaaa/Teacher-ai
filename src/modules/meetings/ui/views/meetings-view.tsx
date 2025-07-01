@@ -9,8 +9,8 @@ function MeetingsView() {
     const trpc = useTRPC();
     const {data} = useSuspenseQuery(trpc.meetings.getmany.queryOptions({}));
   return (
-    <div>
-        {JSON.stringify(data )}
+    <div className='overflow-x-scroll'>
+        {/* {JSON.stringify(data)} */}
     </div>
   )
 }
