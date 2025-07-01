@@ -1,7 +1,8 @@
 const page = () => {
     return (
-        <div>
-            meetings/[meetingId]
+        <div className="overflow-hidden">
+            <h1>Meeting</h1>
+            <p>Meeting</p>
         </div>
     )
 }   
