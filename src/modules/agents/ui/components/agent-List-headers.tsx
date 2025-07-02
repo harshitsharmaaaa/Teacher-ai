@@ -7,6 +7,7 @@ import { useAgentFilters } from "../../hooks/use-agent-filters"
 import { Agentsearchfilter } from "./agent-search-filter"
 import { Agent } from "http"
 import { DEFAULT_PAGE } from "@/constants"
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area"
 
 export const Listheader=()=>{
     const [filters,setfilters]= useAgentFilters();
@@ -16,7 +17,7 @@ export const Listheader=()=>{
     const onClearfilters =()=>{
         setfilters({
             search:"",
-            page:DEFAULT_PAGE
+            page:DEFAULT_PAGE,
         })
     }
     return(
@@ -32,7 +33,9 @@ export const Listheader=()=>{
                         New Agent
                     </Button>
                 </div>
-                <div className="flex items-center gap-x-2 p-1 ">
+                <ScrollArea>
+                    
+                    <div className="flex items-center gap-x-2 p-1 ">
                     <Agentsearchfilter />
                     {isAnyfilterModified && (
                         <Button variant="outline" onClick={onClearfilters}> 
@@ -40,7 +43,9 @@ export const Listheader=()=>{
                             Clear
                         </Button>
                     )}
-                </div>
+                    </div>
+                    <ScrollBar orientation="horizontal"/>
+                </ScrollArea>
 
             </div>
         </>

@@ -133,7 +133,7 @@ export const MeetingForm=({onSucess,onCancel,intialValues}:MeetingInterfaceProps
                                 options={(agents.data?.items??[]).map((agent)=>({
                                     id:agent.id,
                                     value:agent.id,
-                                    childern:(
+                                    children:(
                                         <div className="flex items-center gap-x-2">
                                             <AvatarGenerator
                                             seed={agent.name}
