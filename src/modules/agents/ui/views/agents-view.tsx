@@ -3,7 +3,7 @@ import { useTRPC } from "@/app/api/trpc/client";
 import { ErrorState } from "@/components/Error-state";
 import { LoadingState } from "@/components/loading-state";
 import {  useSuspenseQuery } from "@tanstack/react-query";
-import { DataTable } from "../components/data-table";
+import { DataTable } from "@/components/data-tables";
 import { columns } from "../components/Columns";
 import { EmptyState } from "@/components/empty-state";
 import { useAgentFilters } from "../../hooks/use-agent-filters";
@@ -36,7 +36,9 @@ export const AgentsView = () => {
                 setFilters({page})
             }}
             />
-            {data.items.length===0 && <EmptyState title="Create Your First Agent" description="Create your first agent to get started and join a meeting each agent will have a unique name and instructions"/>}
+            {data.items.length===0 && 
+            <EmptyState title="Create Your First Agent" description="Create your first agent to get started and join a meeting each agent will have a unique name and instructions"/>
+            }
         </div>
     )
 }
