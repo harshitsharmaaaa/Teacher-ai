@@ -50,7 +50,7 @@ export const MeetingsListheader=()=>{
                     <Button
                         variant="ghost"
                         onClick={onClearFilters}
-                        className="text-primary hover-underline"
+                        className="text-primary hover:underline"
                     >
                         <XCircleIcon/>
                         Clear Filters
