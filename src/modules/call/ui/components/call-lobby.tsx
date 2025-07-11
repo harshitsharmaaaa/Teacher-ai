@@ -44,12 +44,6 @@ const AllowBrowserPermission = () => {
 }
 
 export const CallLobby=({onJoin}:Props)=>{
-   
-   const call = useCall();
-   if(!call){
-    console.log("there is no call");
-   }
-
     const { useMicrophoneState, useCameraState } = useCallStateHooks();
     const {hasBrowserPermission:hasMicPermission}= useMicrophoneState();
     const {hasBrowserPermission:hasCameraPermission}= useCameraState();
