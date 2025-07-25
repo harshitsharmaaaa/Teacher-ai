@@ -23,13 +23,16 @@ import { formatError } from "zod/v4/core"
 import { format } from "date-fns"
 import { formatDuration } from "@/lib/utils"
 import { Badge } from "@/components/ui/badge"
+import { Trasncript } from "./transcript"
+import { ChatProvider } from "./chat-provider"
 interface MeetingIdViewProps{
     data:MeetingGetOne
 }
 
 export const CompletedState=({data}:MeetingIdViewProps)=>{
     return(
-        <div className="flex flex-col gap-y-4">
+        <div className="flex flex-col gap-y-4 h-full pb-8">
+             <div className="flex-1 min-h-0 overflow-y-auto">
             <Tabs defaultValue="summary" >
                 <div className="bg-white rounded-lg border px-3">
                     <ScrollArea>
@@ -62,6 +65,12 @@ export const CompletedState=({data}:MeetingIdViewProps)=>{
                         <ScrollBar orientation="horizontal"/>
                     </ScrollArea>
                 </div>
+                <TabsContent value="chat">
+                    <ChatProvider meetingId={data.id} meetingName={data.name}/>
+                </TabsContent>
+                <TabsContent value="transcript">
+                    <Trasncript meetingId={data.id} />
+                </TabsContent>
                 <TabsContent value="recording" >
                     <div className="bg-white rounded-lg border px-4 py-5">
                         <video
@@ -69,7 +78,6 @@ export const CompletedState=({data}:MeetingIdViewProps)=>{
                             controls
                             className="w-full h-full"
                         />
-
                     </div>
                 </TabsContent>
                 <TabsContent value="summary">
@@ -114,7 +122,7 @@ export const CompletedState=({data}:MeetingIdViewProps)=>{
                     </div>
                 </TabsContent>
             </Tabs>
-
+            </div>
         </div>
     )    
 }
